@@ -7,7 +7,7 @@ function copyCode(code) {
 }
 
 function handleCouponClick(couponId) {
-    fetch(`http://localhost:3000/api/coupons/${couponId}/click`, { method: 'POST' })
+    fetch(`/api/coupons/${couponId}/click`, { method: 'POST' })
         .then(response => response.json())  // This will now work since the backend returns JSON
         .then(data => console.log('Coupon clicked:', data))  // data will be the JSON object
         .catch(err => console.error('Error updating coupon click:', err));
@@ -51,12 +51,12 @@ function handleThumbClick(couponId, buttonId) {
     if (buttonId === 'thumbs-up') {
         thumbsUpButton.classList.add('clicked');
         thumbsUpImg.src = 'images/thumb-up-green.png';
-        fetch(`http://localhost:3000/api/coupons/${couponId}/thumbs-up`, { method: 'POST' })
+        fetch(`/api/coupons/${couponId}/thumbs-up`, { method: 'POST' })
             .catch(err => console.error('Error recording thumbs up:', err));
     } else if (buttonId === 'thumbs-down') {
         thumbsDownButton.classList.add('clicked');
         thumbsDownImg.src = 'images/thumb-down-green.png';
-        fetch(`http://localhost:3000/api/coupons/${couponId}/thumbs-down`, { method: 'POST' })
+        fetch(`/api/coupons/${couponId}/thumbs-down`, { method: 'POST' })
             .catch(err => console.error('Error recording thumbs down:', err));
     }
 
@@ -67,7 +67,7 @@ function handleThumbClick(couponId, buttonId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch coupons after the page loads
-    fetch('http://localhost:3000/api/coupons')
+    fetch('/api/coupons')
         .then(response => response.json())
         .then(coupons => {
             const couponCtn = document.getElementsByClassName("couponCtn")[0];
