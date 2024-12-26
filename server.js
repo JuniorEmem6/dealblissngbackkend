@@ -10,8 +10,8 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public')); // Serve static files from the public folder
-app.set('view engine', 'ejs'); // Set EJS as the templating engine
+app.use(express.static('public')); 
+app.set('view engine', 'ejs'); 
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://chinomsochristian03:ahYZxLh5loYrfgss@cluster0.dmkcl.mongodb.net/buzzsecure?retryWrites=true&w=majority')
