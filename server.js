@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 app.set('view engine', 'ejs'); 
+app.set("views", path.join(__dirname, "views"));
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://chinomsochristian03:ahYZxLh5loYrfgss@cluster0.dmkcl.mongodb.net/buzzsecure?retryWrites=true&w=majority')
