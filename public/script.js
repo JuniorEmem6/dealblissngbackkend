@@ -42,20 +42,20 @@ function handleThumbClick(couponId, buttonId) {
     const thumbsDownImg = thumbsDownButton.querySelector('img');
 
     // Reset button styles
-    thumbsUpImg.src = 'images/thumb-up.png';
-    thumbsDownImg.src = 'images/thumb-down.png';
+    thumbsUpImg.src = 'thumb-up.png';
+    thumbsDownImg.src = 'thumb-down.png';
     thumbsUpButton.classList.remove('clicked');
     thumbsDownButton.classList.remove('clicked');
 
     // Update button styles based on click
     if (buttonId === 'thumbs-up') {
         thumbsUpButton.classList.add('clicked');
-        thumbsUpImg.src = 'images/thumb-up-green.png';
+        thumbsUpImg.src = 'thumb-up-green.png';
         fetch(`/api/coupons/${couponId}/thumbs-up`, { method: 'POST' })
             .catch(err => console.error('Error recording thumbs up:', err));
     } else if (buttonId === 'thumbs-down') {
         thumbsDownButton.classList.add('clicked');
-        thumbsDownImg.src = 'images/thumb-down-green.png';
+        thumbsDownImg.src = 'thumb-down-green.png';
         fetch(`/api/coupons/${couponId}/thumbs-down`, { method: 'POST' })
             .catch(err => console.error('Error recording thumbs down:', err));
     }
@@ -85,22 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                    onclick="handleCouponClick('${coupon._id}');">
                                     <div class="coupon-code">${coupon.code}</div>
                                 </a>
-                                <img class="copy" src="images/copy.png" onclick="copyCode('${coupon.code}')" alt="">
+                                <img class="copy" src="copy.png" onclick="copyCode('${coupon.code}')" alt="">
                             </div>  
                             <div class="thumbs-up-extras">
                                 <div class="thumbs">
                                     <button id="thumbs-up-${coupon._id}" class="thumbs-button" 
                                             onclick="handleThumbClick('${coupon._id}', 'thumbs-up')">
-                                        <img src="images/thumb-up.png" alt="">
+                                        <img src="thumb-up.png" alt="">
                                     </button>
                                     <button id="thumbs-down-${coupon._id}" class="thumbs-button" 
                                             onclick="handleThumbClick('${coupon._id}', 'thumbs-down')">
-                                        <img src="images/thumb-down.png" alt="">
+                                        <img src="thumb-down.png" alt="">
                                     </button>
                                 </div>
                                 <div class="view-stats">
                                     <p class="success">100% SUCCESS</p> 
-                                    <div class="stats"><img src="images/view.png" alt=""><p id="click-count-${coupon._id}">${coupon.used} Used - ${coupon.today} Today</p></div>
+                                    <div class="stats"><img src="view.png" alt=""><p id="click-count-${coupon._id}">${coupon.used} Used - ${coupon.today} Today</p></div>
                                 </div>
                             </div>
                         </div>
@@ -118,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Apply the appropriate state
                 if (clickedThumb === 'thumbs-up') {
                     thumbsUpButton.classList.add('clicked');
-                    thumbsUpImg.src = 'images/thumb-up-green.png';
+                    thumbsUpImg.src = 'thumb-up-green.png';
                 } else if (clickedThumb === 'thumbs-down') {
                     thumbsDownButton.classList.add('clicked');
-                    thumbsDownImg.src = 'images/thumb-down-green.png';
+                    thumbsDownImg.src = 'thumb-down-green.png';
                 }
             });
         })
