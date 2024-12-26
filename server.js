@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Coupon = require('./models/Coupon');
 const cors = require('cors');
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
