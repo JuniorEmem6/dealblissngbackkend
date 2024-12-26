@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/coupons';
+const apiUrl = '/api/coupons';
 
 // Load all coupons when the page loads
 document.addEventListener('DOMContentLoaded', loadCoupons);
