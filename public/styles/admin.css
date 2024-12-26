@@ -1,0 +1,180 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    background: #1f8ef1;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Card Styles */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+/* Form Styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn.primary {
+    background: #1f8ef1;
+    color: white;
+}
+
+.btn.primary:hover {
+    background: #1769aa;
+}
+
+.btn.danger {
+    background: #f44336;
+    color: white;
+}
+
+.btn.danger:hover {
+    background: #d32f2f;
+}
+
+.btn.edit {
+    background: #ff9800;
+    color: white;
+}
+
+.btn.edit:hover {
+    background: #e67e22;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background: #1f8ef1;
+    color: white;
+}
+
+.table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.table td:last-child {
+    text-align: center;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    * {
+        font-size: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .table {
+        font-size: 0.8rem;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+    }
+}
