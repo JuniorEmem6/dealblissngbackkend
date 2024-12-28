@@ -182,21 +182,18 @@ h3 {
 }
 
 .coupon-code {
-    background-color: #5A9B06;
+    background-color: #4d7b12b0;
     color: #fff;
     /* padding: 15px 35px; */
     width: 150px;
     height: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     cursor: pointer;
     font-size: 1.5rem;
 }
 
-.coupon-code:hover {
-    background-color: #5A9B06;
-}
 .buyNowBtn {
     background-color: #5A9B06;
     color: #fff;
@@ -211,7 +208,7 @@ h3 {
 }
 
 .buyNowBtn:hover {
-    background-color: #5A9B06;
+    background-color: #5a9b06cd;
 }
 
 .copy {
