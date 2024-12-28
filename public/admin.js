@@ -39,12 +39,13 @@ document.getElementById('couponForm').addEventListener('submit', async (event) =
 
     const offer = document.getElementById('offer').value;
     const code = document.getElementById('code').value;
+    const link = document.getElementById('link').value; // Get link value
 
     try {
         await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ offer, code }),
+            body: JSON.stringify({ offer, code, link }),
         });
 
         document.getElementById('couponForm').reset();
@@ -66,13 +67,14 @@ async function deleteCoupon(id) {
 async function editCoupon(id) {
     const newOffer = prompt('Enter new offer:');
     const newCode = prompt('Enter new code:');
+    const newLink = prompt('Enter new link (e.g., https://example.com):');
 
-    if (newOffer && newCode) {
+    if (newOffer && newCode && newLink) {
         try {
             await fetch(`${apiUrl}/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ offer: newOffer, code: newCode }),
+                body: JSON.stringify({ offer: newOffer, code: newCode, link: newLink }),
             });
 
             loadCoupons();

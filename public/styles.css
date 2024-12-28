@@ -197,6 +197,22 @@ h3 {
 .coupon-code:hover {
     background-color: #5A9B06;
 }
+.buyNowBtn {
+    background-color: #5A9B06;
+    color: #fff;
+    /* padding: 15px 35px; */
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.buyNowBtn:hover {
+    background-color: #5A9B06;
+}
 
 .copy {
     height: 25px;

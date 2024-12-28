@@ -81,10 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="coupon-extras">
                             <div class="coupon-codeCtn">
-                                <a target="_blank" href="https://ng.oraimo.com?affiliate_code=gQU41bWUcc" 
-                                   onclick="handleCouponClick('${coupon._id}');">
-                                    <div class="coupon-code">${coupon.code}</div>
-                                </a>
+                                <div class="coupon-code">${coupon.code}</div>
                                 <img class="copy" src="/copy.png" onclick="copyCode('${coupon.code}')" alt="">
                             </div>  
                             <div class="thumbs-up-extras">
@@ -102,9 +99,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <p class="success">100% SUCCESS</p> 
                                     <div class="stats"><img src="/view.png" alt=""><p id="click-count-${coupon._id}">${coupon.used} Used - ${coupon.today} Today</p></div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <a target="_blank" href="${coupon.link}" 
+                                    onclick="handleCouponClick('${coupon._id}');">
+                                    <div class="buyNowBtn">Buy now</div>
+                                </a>
                 `;
                 couponCtn.append(couponBox);
 

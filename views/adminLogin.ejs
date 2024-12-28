@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        /* Reset some default styles */
+        body, h2, p, form {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        #adminLoginForm {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #5b5f63;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5b5f63;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Success and Error Alerts */
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .alert-error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            #adminLoginForm {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="adminLoginForm">
+        <h2>Admin Login</h2>
+        
+        <!-- Alert message container -->
+        <div id="alertMessage" class="alert"></div>
+        
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required />
+            <label for="password">Password:</label>
+            <input type="password" id="password" required />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const alertMessage = document.getElementById('alertMessage');
+
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                if (!response.ok) {
+                    const errorMessage = (await response.json()).message || 'Invalid credentials';
+                    alertMessage.textContent = errorMessage;
+                    alertMessage.className = 'alert alert-error'; // Display error message
+                    alertMessage.style.display = 'block';
+                    setTimeout(() => alertMessage.style.display = 'none', 4000); // Hide after 4 seconds
+                    return;
+                }
+
+                const { token } = await response.json();
+                localStorage.setItem('adminToken', token);
+                
+                alertMessage.textContent = 'Login Successful';
+                alertMessage.className = 'alert alert-success'; // Display success message
+                alertMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    alertMessage.style.display = 'none';
+                    window.location.href = '/adminDashboard'; // Redirect to admin dashboard after 2 seconds
+                }, 2000);
+            } catch (error) {
+                console.error('Login error:', error);
+                alertMessage.textContent = 'Error during login. Check console for details.';
+                alertMessage.className = 'alert alert-error';
+                alertMessage.style.display = 'block';
+                setTimeout(() => alertMessage.style.display = 'none', 4000);
+            }
+        });
+    </script>
+</body>
+
+</html>

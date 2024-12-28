@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,12 @@
     <link rel="stylesheet" href="admin.css">
     <script src="admin.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
             <h1>Coupon Management Dashboard</h1>
+            <button id="logoutButton" class="btn logout">Logout</button> <!-- Logout button -->
         </header>
         <main>
             <section id="add-coupon" class="card">
@@ -29,10 +32,13 @@
                         <label for="code">Code:</label>
                         <input type="text" id="code" name="code" placeholder="Enter coupon code" required>
                     </div>
+                    <div class="form-group">
+                        <label for="link">Link:</label>
+                        <input type="url" id="link" name="link" placeholder="Link (e.g., https://example.com)" required>
+                    </div>
                     <button type="submit" class="btn primary">Add Coupon</button>
                 </form>
             </section>
-
             <section id="coupon-list" class="card">
                 <h2>All Coupons</h2>
                 <table class="table">
@@ -54,5 +60,38 @@
             </section>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('adminToken');
+            // If no token is found, redirect to login page
+            if (!token) {
+                window.location.href = '/adminLogin';
+                return;
+            }
+            try {
+                const response = await fetch('/api/admin/validateToken', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    localStorage.removeItem('adminToken');
+                    window.location.href = '/adminLogin'; // Redirect to login if token is invalid
+                }
+            } catch (error) {
+                console.error('Error validating token:', error);
+                window.location.href = '/adminLogin'; // Redirect on error
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');  // Clear the token from localStorage
+            window.location.href = '/adminLogin';  // Redirect to login page
+        });
+    </script>
 </body>
+
 </html>

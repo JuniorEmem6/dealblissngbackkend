@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const couponSchema = new mongoose.Schema({
     code: String,
     offer: String,
+    link: { type: String, default: '' }, // New link field
     used: { type: Number, default: 0 },
     today: { type: Number, default: 0 },
     thumbsUp: { type: Number, default: 0 },
