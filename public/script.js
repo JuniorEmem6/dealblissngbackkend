@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <a target="_blank" href="${coupon.link}" 
                                     onclick="handleCouponClick('${coupon._id}');">
-                                    <div class="buyNowBtn">Buy now</div>
+                                    <div class="buyNowBtn">Shop Now</div>
                                 </a>
                 `;
                 couponCtn.append(couponBox);
