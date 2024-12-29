@@ -182,8 +182,8 @@ h3 {
 }
 
 .coupon-code {
-    background-color: #d4d4d4;
-    color: #000;
+    background-color: #5A9B06;
+    color: #fff;
     /* padding: 15px 35px; */
     width: 150px;
     height: 40px;
@@ -508,6 +508,10 @@ footer p {
     }
     footer div li {
         padding: 20px;
+    }
+    .buyNowBtn {
+        height: 50px;
+        font-size: 1.3rem;
     }
 }
 
