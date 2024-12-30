@@ -63,7 +63,6 @@ app.get('/api/admin/validateToken', authenticateToken, (req, res) => {
     res.status(200).json({ message: 'Token is valid' });
 });
 
-
 // Middleware for authentication
 function authenticateToken(req, res, next) {
     const authorizationHeader = req.headers['authorization'];
@@ -86,7 +85,6 @@ function authenticateToken(req, res, next) {
     });
 }
 
-
 // Admin login
 app.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
@@ -104,7 +102,6 @@ app.post('/api/admin/login', async (req, res) => {
         res.status(500).json({ error: 'Error during login' });
     }
 });
-
 
 // Seed admin data
 // const seedAdmin = async () => {
@@ -149,7 +146,6 @@ app.post('/api/coupons', (req, res) => {
         .catch((err) => res.status(500).json({ error: 'Error adding coupon' }));
 });
 
-
 // Edit a coupon's details
 app.put('/api/coupons/:id', (req, res) => {
     const couponId = req.params.id;
@@ -159,7 +155,6 @@ app.put('/api/coupons/:id', (req, res) => {
         .then(updatedCoupon => res.json(updatedCoupon))
         .catch((err) => res.status(500).json({ error: 'Error updating coupon' }));
 });
-
 
 // Delete a coupon
 app.delete('/api/coupons/:id', (req, res) => {
