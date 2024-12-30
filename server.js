@@ -2,13 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Coupon = require('./models/Coupon');
-const cors = require('cors');
 const path = require("path");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Admin = require('./models/Admin');
+const dotenv = require('dotenv');
 
-const JWT_SECRET = 'your_jwt_secret'; // Replace with a secure secret
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET; // Replace with a secure secret
 
 const app = express();
 const PORT = 3000;
@@ -21,7 +23,7 @@ app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://chinomsochristian03:ahYZxLh5loYrfgss@cluster0.dmkcl.mongodb.net/buzzsecure?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('Connected to MongoDB');
         // seedAdmin();
