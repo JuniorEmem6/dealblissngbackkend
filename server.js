@@ -124,7 +124,6 @@ app.post('/api/admin/login', async (req, res) => {
 //     }
 // };
 
-
 // Get all coupons for the admin dashboard
 app.get('/api/coupons', (req, res) => {
     Coupon.find()
