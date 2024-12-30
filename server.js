@@ -65,8 +65,6 @@ app.get('/api/admin/validateToken', authenticateToken, (req, res) => {
 
 
 // Middleware for authentication
-
-// Middleware for authentication
 function authenticateToken(req, res, next) {
     const authorizationHeader = req.headers['authorization'];
     
@@ -87,7 +85,6 @@ function authenticateToken(req, res, next) {
         next(); // Proceed to the next middleware/route handler
     });
 }
-
 
 
 // Admin login
@@ -118,16 +115,14 @@ app.post('/api/admin/login', async (req, res) => {
 //             return;
 //         }
 
-//         const hashedPassword = await bcrypt.hash('buzz', 10);
-//         const admin = new Admin({ username: 'Buzz', password: hashedPassword });
+//         const hashedPassword = await bcrypt.hash('admin_pwd', 10);
+//         const admin = new Admin({ username: 'admin_username', password: hashedPassword });
 //         await admin.save();
 //         console.log('Admin created');
 //     } catch (err) {
 //         console.error('Error seeding admin:', err);
 //     }
 // };
-
-
 
 
 // Get all coupons for the admin dashboard
