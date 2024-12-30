@@ -106,7 +106,7 @@ app.post('/api/admin/login', async (req, res) => {
 // Seed admin data
 // const seedAdmin = async () => {
 //     try {
-//         const existingAdmin = await Admin.findOne({ username: 'admin' });
+//         const existingAdmin = await Admin.findOne({ username: 'admin_username' });
 //         if (existingAdmin) {
 //             console.log('Admin already exists');
 //             return;
