@@ -1,98 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coupon Management Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css" />
     <script src="admin.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <header class="header">
-            <h1>Coupon Management Dashboard</h1>
-            <button id="logoutButton" class="btn logout">Logout</button> <!-- Logout button -->
-        </header>
-        <main>
-            <section id="add-coupon" class="card">
-                <h2>Add New Coupon</h2>
-                <form id="couponForm" class="form">
-                    <div class="form-group">
-                        <label for="offer">Offer:</label>
-                        <input type="text" id="offer" name="offer" placeholder="Enter offer details" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="code">Code:</label>
-                        <input type="text" id="code" name="code" placeholder="Enter coupon code" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="link">Link:</label>
-                        <input type="url" id="link" name="link" placeholder="Link (e.g., https://example.com)" required>
-                    </div>
-                    <button type="submit" class="btn primary">Add Coupon</button>
-                </form>
-            </section>
-            <section id="coupon-list" class="card">
-                <h2>All Coupons</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Offer</th>
-                            <th>Code</th>
-                            <th>Clicks</th>
-                            <th>Today</th>
-                            <th>Thumbs Up</th>
-                            <th>Thumbs Down</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="couponTable">
-                        <!-- Coupons will be dynamically loaded here -->
-                    </tbody>
-                </table>
-            </section>
-        </main>
+      <header class="header">
+        <h1>Coupon Management Dashboard</h1>
+        <button id="logoutButton" class="btn logout">Logout</button>
+        <!-- Logout button -->
+      </header>
+      <main>
+        <section id="add-coupon" class="card">
+          <h2>Add New Coupon</h2>
+          <form id="couponForm" class="form">
+            <div class="form-group">
+              <label for="offer">Description:</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Enter coupon details"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="code">Discount:</label>
+              <input
+                type="text"
+                id="discount"
+                name="discount"
+                placeholder="Enter discount"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="code">Code:</label>
+              <input
+                type="text"
+                id="code"
+                name="code"
+                placeholder="Enter coupon code"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="link">Link:</label>
+              <input
+                type="url"
+                id="link"
+                name="link"
+                placeholder="Link (e.g., https://example.com)"
+                required
+              />
+            </div>
+            <button type="submit" class="btn primary">Add Coupon</button>
+          </form>
+        </section>
+        <section id="coupon-list" class="card">
+          <h2>All Coupons</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Clicks</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="couponTable">
+              <!-- Coupons will be dynamically loaded here -->
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('adminToken');
-            // If no token is found, redirect to login page
-            if (!token) {
-                window.location.href = '/adminLogin';
-                return;
-            }
-            try {
-                const response = await fetch('/api/admin/validateToken', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
+      document.addEventListener("DOMContentLoaded", async () => {
+        const token = localStorage.getItem("adminToken");
+        // If no token is found, redirect to login page
+        if (!token) {
+          window.location.href = "/adminLogin";
+          return;
+        }
+        try {
+          const response = await fetch("/api/admin/validateToken", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-                if (!response.ok) {
-                    localStorage.removeItem('adminToken');
-                    window.location.href = '/adminLogin'; // Redirect to login if token is invalid
-                }
-            } catch (error) {
-                console.error('Error validating token:', error);
-                window.location.href = '/adminLogin'; // Redirect on error
-            }
-        });
+          if (!response.ok) {
+            localStorage.removeItem("adminToken");
+            window.location.href = "/adminLogin"; // Redirect to login if token is invalid
+          }
+        } catch (error) {
+          console.error("Error validating token:", error);
+          window.location.href = "/adminLogin"; // Redirect on error
+        }
+      });
 
-        // Logout functionality
-        document.getElementById('logoutButton').addEventListener('click', () => {
-            localStorage.removeItem('adminToken');  // Clear the token from localStorage
-            window.location.href = '/adminLogin';  // Redirect to login page
-        });
+      // Logout functionality
+      document.getElementById("logoutButton").addEventListener("click", () => {
+        localStorage.removeItem("adminToken"); // Clear the token from localStorage
+        window.location.href = "/adminLogin"; // Redirect to login page
+      });
     </script>
-</body>
-
+  </body>
 </html>
