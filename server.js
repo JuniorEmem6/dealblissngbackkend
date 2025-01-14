@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const Admin = require("./models/Admin");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const fs = require("fs");
 
 dotenv.config();
 
@@ -168,6 +169,42 @@ app.post("/api/coupons/:id/click", (req, res) => {
     .catch((err) =>
       res.status(500).json({ error: "Error updating coupon click count" })
     );
+});
+
+const loadCoupon = (file) => {
+  if (fs.existsSync(`${file}`)) {
+    const data = JSON.parse(fs.readFileSync(`${file}`, "utf8"));
+    return data;
+  } else {
+    return null;
+  }
+};
+
+const insertCoupon = (file, data) => {
+  fs.writeFileSync(`${file}`, JSON.stringify(data, null, 2), "utf8");
+};
+
+app.post("/api/email", (req, res) => {
+  const { email } = req.body;
+
+  const emailRe = loadCoupon("email.json");
+
+  if (!emailRe) {
+    insertCoupon("email.json", [email]);
+  } else {
+    emailRe.push(email);
+    insertCoupon("email.json", emailRe);
+  }
+
+  return res.status(201).json({ message: "Email added successfully!" });
+});
+
+app.get("/api/email", (req, res) => {
+  const emailRe = loadCoupon("email.json");
+
+  return res
+    .status(200)
+    .json({ message: "Email retrieve successfully!", data: emailRe });
 });
 
 // Start the server
