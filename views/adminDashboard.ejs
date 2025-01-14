@@ -86,8 +86,12 @@
           </table>
         </section>
       </main>
+
+      <div id="email"></div>
     </div>
     <script>
+      const emailTable = document.getElementById("email");
+
       document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem("adminToken");
         // If no token is found, redirect to login page
@@ -112,6 +116,19 @@
           window.location.href = "/adminLogin"; // Redirect on error
         }
       });
+
+      const getEmail = async () => {
+        const res = await fetch("/api/email");
+        const email = await res.json();
+
+        email.data.forEach((em) => {
+          const row = document.createElement("p");
+          row.innerText = em;
+          emailTable.appendChild(row);
+        });
+      };
+
+      getEmail();
 
       // Logout functionality
       document.getElementById("logoutButton").addEventListener("click", () => {
