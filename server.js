@@ -196,15 +196,19 @@ app.post("/api/email", (req, res) => {
     insertCoupon("email.json", emailRe);
   }
 
+  const subs = loadCoupon("subs.json");
+  insertCoupon("subs.json", subs + 1);
+
   return res.status(201).json({ message: "Email added successfully!" });
 });
 
 app.get("/api/email", (req, res) => {
   const emailRe = loadCoupon("email.json");
+  const subs = loadCoupon("subs.json");
 
   return res
     .status(200)
-    .json({ message: "Email retrieve successfully!", data: emailRe });
+    .json({ message: "Email retrieve successfully!", data: emailRe, subs });
 });
 
 // Start the server

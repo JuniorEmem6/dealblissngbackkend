@@ -87,10 +87,29 @@
         </section>
       </main>
 
+       <div>
+        <h1 style="font-weight: 600; text-align: center; font-size: 27px">
+          Subscribers
+        </h1>
+        <div
+          style="
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 10px;
+          "
+        >
+          <h1>Total Subscribers</h1>
+          <h3 id="sub" style="margin-left: 5px">0</h3>
+        </div>
+
       <div id="email"></div>
     </div>
     <script>
       const emailTable = document.getElementById("email");
+      const subs = document.getElementById("sub");
+
 
       document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem("adminToken");
@@ -126,6 +145,9 @@
           row.innerText = em;
           emailTable.appendChild(row);
         });
+
+        subs.innerHTML = email.subs;
+
       };
 
       getEmail();
